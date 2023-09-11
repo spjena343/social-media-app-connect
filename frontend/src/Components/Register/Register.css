@@ -1,0 +1,103 @@
+.register {
+  min-height: 100vh;
+  background: #f0f0f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vmax;
+  box-sizing: border-box;
+}
+.registerForm {
+  color: white;
+  background-image:linear-gradient(rgb(106, 208, 186),rgb(158, 123, 123));
+  height: auto;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 2vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registerForm > input {
+  box-sizing: border-box;
+  padding: 1vmax 2vmax;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  background-color: #f0f0f0;
+  margin: 1.5vmax 0;
+  font: 100 1.2rem "Roboto", sans-serif;
+  outline: none;
+}
+
+.registerForm > input[type="file"] {
+  border-radius: 20px;
+  margin: 1.5vmax 0;
+}
+
+.registerForm > input[type="file"]::-webkit-file-upload-button {
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  padding: 0.7vmax 2vmax;
+  border-radius: 20px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.registerForm > input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #bebdbd;
+  color: #000000;
+}
+
+.registerForm > a {
+  align-self: flex-end;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 1.5vmax 0;
+}
+
+/* Style for the sign-up button */
+.registerForm > button {
+  background-color: #4288e3;
+  color: #333;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7vmax 2vmax;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.registerForm > button:hover {
+  background-color: #bebdbd;
+  color: #62afee;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+  .registerForm {
+    width: 90%;
+  }
+
+  .registerForm > input {
+    padding: 3.5vw 6vw;
+    margin: 3vw 0;
+    font-size: 1rem;
+  }
+
+  .registerForm > input[type="file"]::-webkit-file-upload-button {
+    width: 70%;
+  }
+
+  .registerForm > a {
+    align-self: center;
+  }
+}
