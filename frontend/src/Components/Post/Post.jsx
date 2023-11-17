@@ -20,6 +20,7 @@ import {
 import { getFollowingPosts, getMyPosts, loadUser } from "../../Actions/User";
 import User from "../User/User";
 import CommentCard from "../CommentCard/CommentCard";
+import { addNotification, getNotification } from "../../Actions/Notification";
 
 const Post = ({
   postId,
@@ -42,12 +43,15 @@ const Post = ({
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-
+   
   const handleLike = async () => {
     setLiked(!liked);
 
     await dispatch(likePost(postId));
-
+    if(!liked){
+      await dispatch(addNotification(ownerId,user._id,"like",postId))
+      await dispatch(getNotification())
+    }
     if (isAccount) {
       dispatch(getMyPosts());
     } else {
@@ -58,7 +62,8 @@ const Post = ({
   const addCommentHandler = async (e) => {
     e.preventDefault();
     await dispatch(addCommentOnPost(postId, commentValue));
-
+    await dispatch(addNotification(ownerId,user._id,"comment",postId,commentValue))
+    await dispatch(getNotification())
     if (isAccount) {
       dispatch(getMyPosts());
     } else {
@@ -89,6 +94,7 @@ const Post = ({
   return (
     <div className="post">
       <div className="postHeader">
+       
         {isAccount ? (
           <Button onClick={() => setCaptionToggle(!captionToggle)}>
             <MoreVert />
@@ -99,7 +105,7 @@ const Post = ({
       <img src={postImage} alt="Post" />
 
       <div className="postDetails">
-        <Avatar
+      <Avatar
           src={ownerImage}
           alt="User"
           sx={{
@@ -107,16 +113,16 @@ const Post = ({
             width: "3vmax",
           }}
         />
-
         <Link to={`/user/${ownerId}`}>
           <Typography fontWeight={700}>{ownerName}</Typography>
         </Link>
-
+      
         <Typography
           fontWeight={100}
-          color="rgba(0, 0, 0, 0.582)" 
+          color="rgba(0, 0, 0, 0.582)"
           style={{ alignSelf: "center" }}
         >
+
           {caption}
         </Typography>
       </div>
@@ -153,7 +159,6 @@ const Post = ({
       <Dialog open={likesUser} onClose={() => setLikesUser(!likesUser)}>
         <div className="DialogBox">
           <Typography variant="h4">Liked By</Typography>
-
           {likes.map((like) => (
             <User
               key={like._id}

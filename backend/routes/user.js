@@ -37,7 +37,7 @@ router.route("/my/posts").get(isAuthenticated, getMyPosts);
 
 router.route("/userposts/:id").get(isAuthenticated, getUserPosts);
 
-router.route("/user/:id").get(isAuthenticated, getUserProfile);
+router.route("/user/:id").get( isAuthenticated,getUserProfile);
 
 router.route("/users").get(isAuthenticated, getAllUsers);
 

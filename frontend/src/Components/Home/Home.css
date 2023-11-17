@@ -1,13 +1,12 @@
 .home {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 19vw auto 25vw;
   height: 100vh;
 }
 
-.homeleft {
+.homemid {
   background-image:white;
-
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -19,6 +18,8 @@
   padding: 2vmax;
   box-sizing: border-box;
   overflow-y: auto;
+   border-left: solid rgb(228, 223, 223);
+
 } 
 
 .homeUser {
@@ -40,13 +41,9 @@
   transform: translateY(-10px);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1200px) {
   .home {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 11vw auto 25vw;
   }
 
-  .homeleft {
-    padding: 0;
-    min-height: 90vh;
-  }
 }

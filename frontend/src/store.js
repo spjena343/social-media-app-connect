@@ -5,7 +5,8 @@ import {
   userProfileReducer,
   userReducer,
 } from "./Reducers/User";
-import { likeReducer, myPostsReducer, userPostsReducer } from "./Reducers/Post";
+import { likeReducer, myPostsReducer, notificationReducer, userPostsReducer } from "./Reducers/Post";
+import { chatWithAi } from "./Reducers/chatWithAi";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,8 @@ const store = configureStore({
     myPosts: myPostsReducer,
     userProfile: userProfileReducer,
     userPosts: userPostsReducer,
+    notifications:notificationReducer,
+    result:chatWithAi
   },
 });
 

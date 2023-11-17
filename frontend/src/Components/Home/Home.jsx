@@ -2,19 +2,24 @@ import React, { useEffect } from "react";
 import Post from "../Post/Post";
 import User from "../User/User";
 import "./Home.css";
+import Header from "../Header/Header"
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, getFollowingPosts } from "../../Actions/User";
+import { getAllUsers, getFollowingPosts, loadUser } from "../../Actions/User";
 import Loader from "../Loader/Loader";
 import { Typography } from "@mui/material";
 import { useAlert } from "react-alert";
+import { getNotification } from "../../Actions/Notification";
 
 const Home = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
+
   const { loading, posts, error } = useSelector(
     (state) => state.postOfFollowing
   );
+  const { isAuthenticated } = useSelector((state) => state.user);
+
 
   const { users, loading: usersLoading } = useSelector(
     (state) => state.allUsers
@@ -25,6 +30,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getFollowingPosts());
     dispatch(getAllUsers());
+    dispatch(loadUser())
+    dispatch(getNotification())
   }, [dispatch]);
 
   useEffect(() => {
@@ -48,6 +55,9 @@ const Home = () => {
   ) : (
     <div className="home">
       <div className="homeleft">
+      {isAuthenticated && <Header />}
+      </div>
+      <div className="homemid">
         {posts && posts.length > 0 ? (
           posts.map((post) => (
             <Post

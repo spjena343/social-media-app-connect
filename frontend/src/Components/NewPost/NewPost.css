@@ -5,10 +5,11 @@
   justify-content: center;
   padding: 2vmax;
   box-sizing: border-box;
+  color: white;
 }
 
 .newPostForm {
-  background-image:linear-gradient(rgb(106, 208, 186),rgb(158, 123, 123));
+  background-image:linear-gradient(rgb(19, 19, 19),rgb(158, 123, 123));
   height: 100%;
   width: 50%;
   border-radius: 30px;

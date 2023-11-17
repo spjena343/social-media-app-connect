@@ -6,6 +6,7 @@ exports.createPost = async (req, res) => {
     const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
       folder: "posts",
     });
+    
     const newPostData = {
       caption: req.body.caption,
       image: {
@@ -57,12 +58,11 @@ exports.deletePost = async (req, res) => {
     await post.remove();
 
     const user = await User.findById(req.user._id);
-
     const index = user.posts.indexOf(req.params.id);
     user.posts.splice(index, 1);
 
     await user.save();
-
+    
     res.status(200).json({
       success: true,
       message: "Post deleted",
@@ -99,12 +99,14 @@ exports.likeAndUnlikePost = async (req, res) => {
       });
     } else {
       post.likes.push(req.user._id);
-
+  
       await post.save();
+
+    const {name} = await User.findById(req.user._id);
 
       return res.status(200).json({
         success: true,
-        message: "Post Liked",
+        message:`${name} liked the post`,
       });
     }
   } catch (error) {
@@ -171,8 +173,8 @@ exports.updateCaption = async (req, res) => {
 
 exports.commentOnPost = async (req, res) => {
   try {
+    
     const post = await Post.findById(req.params.id);
-
     if (!post) {
       return res.status(404).json({
         success: false,
@@ -180,6 +182,7 @@ exports.commentOnPost = async (req, res) => {
       });
     }
 
+    const {name} = await User.findById(req.user._id);
     let commentIndex = -1;
 
     // Checking if comment already exists
@@ -194,10 +197,9 @@ exports.commentOnPost = async (req, res) => {
       post.comments[commentIndex].comment = req.body.comment;
 
       await post.save();
-
       return res.status(200).json({
         success: true,
-        message: "Comment Updated",
+        message: `${name} has updated the comment`,
       });
     } else {
       post.comments.push({
@@ -208,7 +210,7 @@ exports.commentOnPost = async (req, res) => {
       await post.save();
       return res.status(200).json({
         success: true,
-        message: "Comment added",
+        message:`${name} has commented on your post`,
       });
     }
   } catch (error) {
@@ -230,7 +232,6 @@ exports.deleteComment = async (req, res) => {
       });
     }
 
-    // Checking If owner wants to delete
 
     if (post.owner.toString() === req.user._id.toString()) {
       if (req.body.commentId === undefined) {

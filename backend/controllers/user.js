@@ -4,6 +4,7 @@ const { sendEmail } = require("../middlewares/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 
+//for register
 exports.register = async (req, res) => {
   try {
     const { name, email, password, avatar } = req.body;
@@ -47,6 +48,8 @@ exports.register = async (req, res) => {
   }
 };
 
+
+//for login
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -111,7 +114,7 @@ exports.logout = async (req, res) => {
 exports.followUser = async (req, res) => {
   try {
     const userToFollow = await User.findById(req.params.id);
-    const loggedInUser = await User.findById(req.user._id);
+    const loggedInUser= await User.findById(req.user._id);
 
     if (!userToFollow) {
       return res.status(404).json({
@@ -143,7 +146,7 @@ exports.followUser = async (req, res) => {
 
       res.status(200).json({
         success: true,
-        message: "User followed",
+        message:`${loggedInUser.name} followed you`,
       });
     }
   } catch (error) {
@@ -248,6 +251,7 @@ exports.deleteMyProfile = async (req, res) => {
       expires: new Date(Date.now()),
       httpOnly: true,
     });
+
 
     // Delete all posts of the user
     for (let i = 0; i < posts.length; i++) {

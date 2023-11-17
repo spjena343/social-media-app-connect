@@ -11,14 +11,13 @@ exports.isAuthenticated = async (req, res, next) => {
       });
     }
 
-    const decoded = await jwt.verify(token,process.env.JWT_SECRET)
+    const decoded =  jwt.verify(token,process.env.JWT_SECRET)
 
     req.user = await User.findById(decoded._id);
-
     next();
   } catch (error) {
     res.status(500).json({
-      message: error.message,
+      message: error,
     });
   }
 };

@@ -1,32 +1,94 @@
 .header {
+  background: rgb(4, 4, 4);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background:rgb(134, 131, 131);
-}
-.header > a {
-  width: 2vmax;
-  height: 2vmax;
-  margin: 1vmax 4vmax;
-}
-.header > a > svg {
-  font-size: 2vmax;
-  transition: all 0.5s;
-  color:white;
+  flex-direction: column;
+  overflow: auto;
 }
 
-.header > a > svg:hover {
+.logo {
+  margin: 7vh;
   color: white;
+  font-size: 2vw;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+
+}
+
+.navicons {
+  padding-top: 1vh;
+  margin-bottom: 33vh;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  margin: 20px 20px 50px 20px;
+  padding: 10px;
+  font-size: 1.3vw;
+  color: aliceblue;
+
+}
+
+.notification {
+  padding-right: 16vw;
+}
+
+.nspan {
+  padding-left: 1vw;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+.icons:hover {
+  border-radius: 3px;
+  background-color: #383838;
+  cursor: pointer;
+}
+
+
+.icons:hover svg {
   transform: scale(1.2);
 }
 
-@media screen and (max-width: 600px) {
-  .header > a {
-    width: 8vw;
-    height: 8vw;
-    margin: 2vw 8vw;
+.icons>span {
+  margin-left: 10%;
+}
+
+
+
+
+
+@media screen and (max-width: 1200px) {
+
+  .navicons {
+    padding-top: 7vh;
+    margin-bottom: 40vh;
   }
-  .header > a > svg {
-    font-size: 8vw;
+
+  .icons {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 50px 20px;
+    padding: 10px;
+    font-size: 1.3vw;
+    color: aliceblue;
   }
+
+  .nspan {
+    display: none;
+  }
+
+  .menu_span {
+    display: none;
+  }
+
+  .logo {
+    display: none;
+  }
+
 }

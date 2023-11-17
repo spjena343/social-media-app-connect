@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./Components/Header/Header";
 import Login from "./Components/Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -16,19 +15,20 @@ import ResetPassword from "./Components/ResetPassword/ResetPassword";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import Search from "./Components/Search/Search";
 import NotFound from "./Components/NotFound/NotFound";
+import NotificationsContainer from "./Components/Notifications/NotificationsContainer";
+import { getNotification } from "./Actions/Notification";
 
 function App() {
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(getNotification());
   }, [dispatch]);
-
-  const { isAuthenticated } = useSelector((state) => state.user);
 
   return (
     <Router>
-      {isAuthenticated && <Header />}
-
       <Routes>
         <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
         <Route
@@ -71,7 +71,10 @@ function App() {
         />
 
         <Route path="search" element={<Search />} />
-
+        <Route
+          path="/notifications"
+          element={isAuthenticated ? <NotificationsContainer /> : <Login />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

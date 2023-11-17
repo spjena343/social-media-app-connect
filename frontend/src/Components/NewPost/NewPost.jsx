@@ -56,10 +56,11 @@ const NewPost = () => {
           placeholder="Caption..."
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
-        />
+        />      
         <Button disabled={loading} type="submit">
           Post
         </Button>
+        
       </form>
     </div>
   );

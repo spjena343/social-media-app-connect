@@ -335,7 +335,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
     dispatch({
       type: "followUserRequest",
     });
-
+   
     const { data } = await axios.get(`/api/v1/follow/${id}`);
     dispatch({
       type: "followUserSuccess",

@@ -7,12 +7,14 @@
   margin: 2vmax;
 }
 
+
 .postHeader {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 1vmax;
 }
+
 .postHeader > button {
   border-radius: 100%;
   color: rgba(0, 0, 0, 0.582);

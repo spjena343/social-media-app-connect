@@ -11,6 +11,7 @@ import {
 import Loader from "../Loader/Loader";
 import Post from "../Post/Post";
 import User from "../User/User";
+import { addNotification, getNotification } from "../../Actions/Notification";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ const UserProfile = () => {
 
   const followHandler = async () => {
     setFollowing(!following);
+    if(!following){
+      await dispatch(addNotification(params.id,user._id,"follow"))
+      await dispatch(getNotification(user._id))
+    }
     await dispatch(followAndUnfollowUser(user._id));
     dispatch(getUserProfile(params.id));
   };

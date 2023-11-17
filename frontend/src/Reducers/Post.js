@@ -1,6 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  loading: false,
+  message: null,
+  error: null,
+  notifications: [],
+};
 
 export const likeReducer = createReducer(initialState, {
   likeRequest: (state) => {
@@ -186,4 +191,41 @@ export const userPostsReducer = createReducer(initialState, {
   clearErrors: (state) => {
     state.error = null;
   },
+});
+
+export const notificationReducer = createReducer(initialState, {
+  notificationCreateRequest: (state) => {
+    state.loading = true;
+  },
+  notificationCreateSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  notificationCreateFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  notificationGetRequest: (state) => {
+    state.loading = true;
+  },
+  notificationGetSuccess: (state, action) => {
+    state.loading = false;
+    state.notifications = action.payload;
+  },
+  notificationGetFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  notificationDeleteRequest: (state) => {
+    state.loading = true;
+  },
+  notificationDeleteSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  notificationDeleteFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  
 });
