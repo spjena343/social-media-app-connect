@@ -37,4 +37,3 @@ export const chatWithAi = (input) => async (dispatch) => {
   }
 };
 
-//AIzaSyD4yed2x2DYnn_QD0szY18h92Pa7UKa0dw
