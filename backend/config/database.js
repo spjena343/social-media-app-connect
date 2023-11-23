@@ -5,6 +5,9 @@ exports.connectDatabase = () => {
       useNewUrlParser: "true",
       useUnifiedTopology: "true",
     })
+
     .then((con) => console.log(`database is connected :${con.connection.host}`))
     .catch((err) => console.log(err));
+    mongoose.set('strictQuery', true);
+
 };

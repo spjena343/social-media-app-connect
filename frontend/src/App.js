@@ -25,6 +25,7 @@ function App() {
   useEffect(() => {
     dispatch(loadUser());
     dispatch(getNotification());
+    console.log(process.env.REACT_APP_PALM_AI_KEY)
   }, [dispatch]);
 
   return (
